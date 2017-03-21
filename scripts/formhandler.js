@@ -48,24 +48,27 @@
 
     FormHandler.prototype.addOrderHandler = function(fn) {
         console.log('Setting decaf handler for form');
-        this.$formElement.on('change', '[name="coffee"],[name="strength"]', function(event) {
-            if (event.target.name === 'coffee') {
+        this.$formElement.on('input', '[name="coffee"],[name="strength"]', function(event) {
+            if (event.target.name == 'coffee') {
                 var cofeeOrder = event.target.value;
-                var cofeeStrength = $('#strengthLevel').val();
+                var cofeeStrength = document.getElementById('strengthLevel').value;
             } else {
                 var cofeeStrength = event.target.value;
-                var cofeeOrder = $("#coffeeOrder").val();
+                var cofeeOrder = document.getElementById('coffeeOrder').value;
             }
             var message = '';
             if (fn(cofeeOrder, cofeeStrength)) {
-                event.target.setCustomValidity('');
+                document.getElementById('coffeeOrder').setCustomValidity('');
+                document.getElementById('strengthLevel').setCustomValidity('');
             } else {
-                  if (event.target.name === 'coffee'){
+                  if (event.target.name == 'coffee'){
                       message = 'Coffee Order should not be ' + cofeeOrder;
+                      document.getElementById('strengthLevel').setCustomValidity('');
                   }else{
                       message = 'Caffeine Rating: '+cofeeStrength+' should be less than 20';
+                      document.getElementById('coffeeOrder').setCustomValidity('');
                   }
-                event.target.setCustomValidity(message);
+                  event.target.setCustomValidity(message);
             }
         });
     };

@@ -7,7 +7,7 @@
             return /.+@bignerdranch\.com$/.test(email);
         },
         isDecafed: function(strinValue, IntValue) {
-            if (strinValue === 'decaf' && IntValue > 20) {
+            if (strinValue == 'decaf' && IntValue > 20) {
                 return false;
             } else {
                 return true;
